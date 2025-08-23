@@ -1,0 +1,22 @@
+# CLion specific files
+.idea/workspace.xml
+.idea/tasks.xml
+cmake-build-*/
+
+# Build artifacts
+*.o
+*.obj
+*.exe
+*.dll
+*.so
+*.a
+*.lib
+
+# Log and temporary files
+*.log
+*.tmp
+*.swp
+
+# System files
+.DS_Store
+Thumbs.db
