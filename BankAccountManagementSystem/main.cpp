@@ -1,61 +1,11 @@
 #include <iostream>
 #include <string>
-#include <utility>
 #include <vector>
 #include <limits>
-
+#include "Account.h"
 using namespace std;
 
-class Account{
-private:
-    long long accountNumber;
-    string name;
-    double balance;
-public:
-    Account(const long long a, string n, const double b): accountNumber(a), name(std::move(n)), balance(b){}
-
-    void deposit(const double b){
-        if(b < 1){
-            cout<<"Add valid amount!"<<endl;
-            return;
-        }
-        balance += b;
-        cout<<"Total balance: "<<balance<<endl;
-    }
-
-    void withdraw(const double amount){
-        if(amount > balance){
-            cout<<"Not sufficient balance!"<<endl;
-            return;
-        }else if(amount < 1){
-            cout<<"Invalid amount to withdraw!"<<endl;
-            return;
-        }
-
-        balance -= amount;
-        cout<<"Remaining balance: "<<balance<<endl;
-    }
-
-    [[nodiscard]] long long getAccountNumber() const{
-        return accountNumber;
-    }
-
-    void accountInfo() const{
-        cout<<endl<<" Account Info"<<endl;
-        cout<<" _____________________________________________"<<endl;
-        cout<<"| Account Number: "<<accountNumber<<endl;
-        cout<<"| Name: "<<name<<endl;
-        cout<<"| Balance: "<<balance<<endl;
-        cout<<"|_____________________________________________"<<endl;
-    }
-
-    [[nodiscard]] double checkBalance() const{
-        return balance;
-    }
-
-};
-
-Account* findAccount(vector<Account>& accounts, long long accountNumber) {
+Account* findAccount(vector<Account>& accounts, const long long accountNumber) {
     for (auto& account : accounts) {
         if (account.getAccountNumber() == accountNumber) {
             return &account;
@@ -76,7 +26,6 @@ int main(){
     do {
         cout<<"Enter your choice: ";
         cin>>choice;
-        cout<<endl;
 
         if (cin.fail()) {
             cout << "Invalid input. Please enter a number." << endl;
@@ -93,12 +42,11 @@ int main(){
 
                 cout<<"Enter your 9 digit account number: ";
                 cin>>accountNumber;
-                cout<<endl<<"Enter your name: ";
+                cout<<"Enter your name: ";
                 cin.ignore();
                 getline(cin, name);
                 cout<<"Enter your initial balance: ";
                 cin>>initialBalance;
-                cout<<endl;
                 accounts.emplace_back(accountNumber, name, initialBalance);
                 cout<<"Account created successfully!"<<endl;
                 break;
@@ -108,7 +56,6 @@ int main(){
                 const Account* accountDetails = nullptr;
                 cout<<"Enter your 9 digit account number: ";
                 cin>>accountNumber;
-                cout<<endl;
 
                 accountDetails = findAccount(accounts, accountNumber);
                 if(accountDetails != nullptr) {
@@ -124,7 +71,6 @@ int main(){
                 Account* accountDetails = nullptr;
                 cout<<"Enter your 9 digit account number: ";
                 cin>>accountNumber;
-                cout<<endl;
 
                 accountDetails = findAccount(accounts, accountNumber);
                 if(accountDetails != nullptr) {
@@ -143,7 +89,6 @@ int main(){
                 Account* accountDetails = nullptr;
                 cout<<"Enter your 9 digit account number: ";
                 cin>>accountNumber;
-                cout<<endl;
 
                 accountDetails = findAccount(accounts, accountNumber);
                 if(accountDetails != nullptr) {
