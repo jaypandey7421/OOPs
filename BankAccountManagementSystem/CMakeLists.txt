@@ -4,4 +4,6 @@ project(BankAccountManagementSystem)
 set(CMAKE_CXX_STANDARD 20)
 
 add_executable(BankAccountManagementSystem main.cpp
-        Account.cpp)
+        Account.cpp
+        CurrentAccount.cpp
+        SavingsAccount.cpp)

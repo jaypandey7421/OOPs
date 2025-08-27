@@ -5,18 +5,20 @@
 using namespace std;
 
 class Account{
-private:
+protected:
     long long accountNumber;
     string name;
     double balance;
 public:
     Account(long long a, string n, double b);
+    virtual ~Account()= default;
 
-    void deposit(double b);
-    void withdraw(double amount);
     [[nodiscard]] long long getAccountNumber () const;
-    void accountInfo() const;
-    [[nodiscard]] double checkBalance() const;
+
+    virtual void deposit(double b);
+    virtual void withdraw(double amount) = 0;
+    virtual void accountInfo() const = 0;
+    [[nodiscard]] virtual double checkBalance() const;
 };
 
 #endif
