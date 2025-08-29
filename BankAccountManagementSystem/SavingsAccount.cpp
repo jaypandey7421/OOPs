@@ -12,6 +12,7 @@ Account(accNo, std::move(name), initialBalance){
 void SavingsAccount::withdraw(const double amount) {
     if (amount > 0 && amount <= balance) {
         balance -= amount;
+        history.emplace_back("Withdraw", amount, balance);
         cout<<"Remaining Balance: "<<balance<<endl;
     }
     else {
@@ -22,6 +23,7 @@ void SavingsAccount::withdraw(const double amount) {
 void SavingsAccount::addInterest() {
     const double interest = balance * interestRate/100;
     balance += interest;
+    history.emplace_back("Interest", interest, balance);
     cout<<"Total Balance: "<<balance<<endl;
 }
 
