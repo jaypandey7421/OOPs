@@ -7,6 +7,7 @@
 #include "CurrentAccount.h"
 using namespace std;
 
+// Utility function to find a polymorphic Account object.
 Account* findAccount(const vector<Account*>& accounts, const long long accountNumber) {
     for (const auto account : accounts) {
         if (account->getAccountNumber() == accountNumber) {
@@ -26,11 +27,13 @@ int main(){
     cout<<"4 Deposit."<<endl;
     cout<<"5 Withdraw."<<endl;
     cout<<"6 Add Interest to the Account Balance. (Only for Savings Accounts)"<<endl;
-    cout<<"7 Exit."<<endl;
+    cout<<"7 Transaction History!"<<endl;
+    cout<<"8 Exit."<<endl;
     do {
         cout<<"Enter your choice: ";
         cin>>choice;
-
+        // If user enters any other type of input - instead a number.
+        // To save it from an infinite loop.
         if (cin.fail()) {
             cout << "Invalid input. Please enter a number." << endl;
             cin.clear();
@@ -141,6 +144,20 @@ int main(){
                 break;
             }
             case 7: {
+                const Account* accountDetails = nullptr;
+                long long accountNumber;
+                cout<<"Enter your 9 digit account number: ";
+                cin>>accountNumber;
+                accountDetails = findAccount(accounts, accountNumber);
+                if(accountDetails != nullptr) {
+                    accountDetails->showHistory();
+                }
+                else {
+                    cout<<"Account not found."<<endl;
+                }
+                break;
+            }
+            case 8: {
                 cout<<"Exiting system, good by!"<<endl;
                 break;
             }
@@ -150,7 +167,7 @@ int main(){
         }
 
 
-    }while (choice != 7);
+    }while (choice != 8);
 
 
     return 0;

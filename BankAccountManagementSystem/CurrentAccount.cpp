@@ -12,6 +12,7 @@ Account(accNo, std::move(name), initialBalance){
 void CurrentAccount::withdraw(const double amount) {
     if (amount > 0 && amount <= overDraftLimit+balance) {
         balance -= amount;
+        history.emplace_back("Withdraw", amount, balance);
         cout<<"Remaining Balance: "<<balance<<endl;
     }
     else {
